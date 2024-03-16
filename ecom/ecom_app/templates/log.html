@@ -1,221 +1,242 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-
+{% block logout %}
+{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha384-dZJphvWB4gBFHqhDyv4m3D7cycoqj/ZxVBbsKsW9ec9CSJ0+Emlwj8bs3iyCegQj" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-dZJphvWB4gBFHqhDyv4m3D7cycoqj/ZxVBbsKsW9ec9CSJ0+Emlwj8bs3iyCegQj" crossorigin="anonymous" />
 
-<div class="container-fluid">
+  <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6">
-            <div class="form-container">
-                <div class="welcome-msg">Welcome !!!</div>
-                <div class="signup-msg">Welcome back User</div>
+      <div class="col-lg-6">
+        <div class="form-container">
+          <div class="welcome-msg">Welcome !!!</div>
+          <div class="signup-msg">Welcome back User</div>
 
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="username"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter a username"
-                            name="email" required>
-                    </div>
-
-                    <div class="form-group d-flex justify-content-between align-items-center">
-                        <!-- Use flexbox for alignment -->
-                        <label for="password"><i class="fa fa-lock"></i> Password</label>
-                        <div class="forgot-password-link">
-                            <a href="#">Forgot Password?</a>
-                        </div>
-                    </div>
-                    <div class="form-group"> <!-- Moved the password input into its own form-group -->
-                        <input type="password" class="form-control" id="password" name='pass1'
-                            placeholder="Enter a password" required>
-                    </div>
-                    <div class="form-group"> <!-- Moved the login button into its own form-group -->
-                        <button type="submit" class="btn btn-primary btn-block rounded">Login</button>
-                    </div>
-                </form>
-
-                <div class="login-msg text-center">
-                    <span>I don't have an account?</span>
-                    <a href="{% url 'register' %}" class="sign-in-link">Sign up</a>
-                </div>
-                <div class="div">
-                    <div class="div-2"></div>
-                    <div class="div-3">or</div>
-                    <div class="div-4"></div>
-                </div>
-                <style>
-                    .div {
-                        align-self: center;
-                        display: flex;
-                        margin-top: 29px;
-                        align-items: center;
-                        justify-content: space-between;
-                        gap: 20px;
-                        font-size: 14px;
-                        color: #969ab8;
-                        font-weight: 500;
-                        white-space: nowrap;
-                        text-align: center;
-                        letter-spacing: 0.1px;
-                    }
-
-                    @media (max-width: 991px) {
-                        .div {
-                            white-space: initial;
-                        }
-                    }
-
-                    .div-2 {
-                        border-color: rgba(11, 12, 13, 1);
-                        border-style: solid;
-                        border-width: 1px;
-                        background-color: #0b0c0d;
-                        align-self: stretch;
-                        width: 200px;
-                        height: 1px;
-                        margin: auto 0;
-                    }
-
-                    .header__logo img {
-                        max-width: 52%;
-                        margin-right: 239px;
-                    }
-
-                    .div-3 {
-                        font-family: Poppins, sans-serif;
-                        align-self: stretch;
-                    }
-
-                    .div-4 {
-                        border-color: rgba(16, 16, 17, 1);
-                        border-style: solid;
-                        border-width: 1px;
-                        background-color: #101011;
-                        align-self: stretch;
-                        width: 200px;
-                        height: 1px;
-                        margin: auto 0;
-                    }
-                </style>
-                <a href=""><img loading="lazy"
-                        srcset="https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&"
-                        class="img" /></a>
-                <style>
-                    .img {
-                        aspect-ratio: 2.63;
-                        object-fit: auto;
-                        object-position: center;
-                        width: 138px;
-                        fill: #fff;
-                        stroke-width: 1.604px;
-                        stroke: #e0e2e9;
-                        border-color: rgba(224, 226, 233, 1);
-                        border-style: solid;
-                        border-width: 2px;
-                        align-self: center;
-                        margin-top: 40px;
-                        max-width: 100%;
-                    }
-
-                    a {
-                        display: flex;
-                        color: #007bff;
-                        text-decoration: none;
-                        background-color: transparent;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                </style>
+          <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="username"><i class="fa fa-envelope"></i> Email</label>
+              <input type="text" class="form-control" id="username" placeholder="Enter a username" name="email" required />
             </div>
 
+            <div class="form-group d-flex justify-content-between align-items-center">
+              <!-- Use flexbox for alignment -->
+              <label for="password"><i class="fa fa-lock"></i> Password</label>
+              <div class="forgot-password-link">
+                <a href="#">Forgot Password?</a>
+              </div>
+            </div>
+            <div class="form-group">
+              <!-- Moved the password input into its own form-group -->
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter a password" required />
+            </div>
+            <div class="form-group">
+              <!-- Moved the login button into its own form-group -->
+              <button type="submit" class="btn btn-primary btn-block rounded">Login</button>
+            </div>
+            {% if messages %}
+              <div class="messages text-center text-capitalize font-weight-bold">
+                {% for message in messages %}
+                  {% if message.tags == 'error' %}
+                    <h5 class="text-danger">! {{ message }}</h5>
+                  {% elif message.tags == 'success' %}
+                    <h5 class="text-success">! {{ message }}</h5>
+                  {% else %}
+                    <h5>! {{ message }}</h5>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+            <br />
+          </form>
+
+          <div class="login-msg text-center">
+            <span>I don't have an account?</span>
+            <a href="{% url 'register' %}" class="sign-in-link">Sign up</a>
+          </div>
+          <div class="div">
+            <div class="div-2"></div>
+            <div class="div-3">or</div>
+            <div class="div-4"></div>
+          </div>
+
+          <style>
+            .div {
+              align-self: center;
+              display: flex;
+              margin-top: 29px;
+              align-items: center;
+              justify-content: space-between;
+              gap: 20px;
+              font-size: 14px;
+              color: #969ab8;
+              font-weight: 500;
+              white-space: nowrap;
+              text-align: center;
+              letter-spacing: 0.1px;
+            }
+            
+            @media (max-width: 991px) {
+              .div {
+                white-space: initial;
+              }
+            }
+            
+            .div-2 {
+              border-color: rgba(11, 12, 13, 1);
+              border-style: solid;
+              border-width: 1px;
+              background-color: #0b0c0d;
+              align-self: stretch;
+              width: 200px;
+              height: 1px;
+              margin: auto 0;
+            }
+            
+            .header__logo img {
+              max-width: 52%;
+              margin-right: 239px;
+            }
+            
+            .div-3 {
+              font-family: Poppins, sans-serif;
+              align-self: stretch;
+            }
+            
+            .div-4 {
+              border-color: rgba(16, 16, 17, 1);
+              border-style: solid;
+              border-width: 1px;
+              background-color: #101011;
+              align-self: stretch;
+              width: 200px;
+              height: 1px;
+              margin: auto 0;
+            }
+          </style>
+          <a href=""><img loading="lazy" srcset="https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/21341d74bec0655e1fd714d03cb408b5df2f6fbea862b2eab8d8d40fee209a22?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&" class="img" /></a>
+          <br />
+          <br />
+
+          <style>
+            h5 {
+              margin: 0;
+              color: #ff0000;
+              font-weight: 400;
+              font-family: 'Montserrat', sans-serif;
+            }
+            
+            .img {
+              aspect-ratio: 2.63;
+              object-fit: auto;
+              object-position: center;
+              width: 138px;
+              fill: #fff;
+              stroke-width: 1.604px;
+              stroke: #e0e2e9;
+              border-color: rgba(224, 226, 233, 1);
+              border-style: solid;
+              border-width: 2px;
+              align-self: center;
+              margin-top: 40px;
+              max-width: 100%;
+            }
+            
+            a {
+              display: flex;
+              color: #007bff;
+              text-decoration: none;
+              background-color: transparent;
+              align-items: center;
+              justify-content: center;
+            }
+          </style>
         </div>
-        <div class="col-lg-6">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a12343ddf6817b46a145815a50657abe2d18271441a9b0cdad0489742907d67?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&"
-                class="img-fluid" alt="Signup Image">
-        </div>
+      </div>
+      <div class="col-lg-6">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a12343ddf6817b46a145815a50657abe2d18271441a9b0cdad0489742907d67?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&" class="img-fluid" alt="Signup Image" />
+      </div>
     </div>
-</div>
+  </div>
 
-<style>
+  <style>
     .container-fluid {
-        background-color: #d9d9d9;
-        padding: 50px;
+      background-color: #d9d9d9;
+      padding: 50px;
     }
-
+    
     .forgot-password-link a {
-        color: #f8a435;
-        font-size: 14px;
+      color: #f8a435;
+      font-size: 14px;
     }
-
+    
     .forgot-password-link a:hover {
-        color: #007bff;
-        text-decoration: none;
+      color: #007bff;
+      text-decoration: none;
     }
-
+    
     .form-container {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-        width: 610px;
-        height: 630px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      width: 610px;
+      height: 670px;
     }
-
+    
     .welcome-msg {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
-
+    
     .signup-msg {
-        font-size: 18px;
-        margin-bottom: 30px;
+      font-size: 18px;
+      margin-bottom: 30px;
     }
-
+    
     .form-group {
-        margin-bottom: 20px;
+      margin-bottom: 20px;
     }
-
+    
     .form-group label {
-        font-weight: bold;
+      font-weight: bold;
     }
-
+    
     .btn-primary {
-        background-color: #f8a435;
-        border-color: #f8a435;
+      background-color: #f8a435;
+      border-color: #f8a435;
     }
-
+    
     .btn-primary:hover {
-        background-color: #f6871f;
-        border-color: #f6871f;
+      background-color: #f6871f;
+      border-color: #f6871f;
     }
-
+    
     .sign-in-link {
-        color: #4045c8;
-        font-weight: bold;
+      color: #4045c8;
+      font-weight: bold;
     }
-
+    
     .img-fluid {
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-        margin-top: 18px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 18px;
     }
-
+    
     @media (max-width: 992px) {
-        .container-fluid {
-            padding: 20px;
-        }
-
-        .col-lg-6 {
-            max-width: 100%;
-        }
-
-        .img-fluid {
-            margin-top: 20px;
-        }
+      .container-fluid {
+        padding: 20px;
+      }
+    
+      .col-lg-6 {
+        max-width: 100%;
+      }
+    
+      .img-fluid {
+        margin-top: 20px;
+      }
     }
-</style>
-{% endblock content %}
+  </style>
+{% endblock %}

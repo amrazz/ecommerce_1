@@ -23,20 +23,19 @@
     <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
 
-   
     <style>
       .header__logo {
         padding: 24px;
       }
-    
+      
       .header__logo img {
         max-width: 100%; /* Adjust as needed */
       }
       .header__menu {
-    padding: 30px 0 27px;
-    margin-right: 115px;
-}
-    
+        padding: 30px 0 27px;
+        margin-right: 115px;
+      }
+      
       .header__menu ul {
         list-style: none;
         margin: 0;
@@ -44,44 +43,49 @@
         display: flex; /* Ensures the list items are displayed inline */
         justify-content: center; /* Centers the items horizontally */
       }
-    
+      
       .header__menu ul li {
         margin: 0 15px; /* Adjust spacing between menu items */
       }
-    
+      
       .header__menu ul li a {
         color: #333; /* Adjust link color as needed */
         text-decoration: none;
         font-weight: 500; /* Adjust font weight as needed */
       }
-    
+      
       .footer__logo {
         margin-bottom: 20px;
         max-width: 60%;
       }
-    
+      
       #b4 {
         max-width: 2574px;
         position: absolute;
         margin-top: 325px;
       }
-    
+      
       #b4 p {
         color: white;
       }
       .header__logo img {
         max-width: 52%;
-    }
-    .categories__text a{
-      color:#707070;
-    }
-    .header__right {
-    text-align: right;
-    padding: 30px 0 27px;
-    padding-left: 78px;
-    padding-right: 15px;
-
-    }
+      }
+      .categories__text a {
+        color: #707070;
+      }
+      .header__right {
+        text-align: center;
+        padding: 30px 0 27px;
+        padding-left: 78px;
+        padding-right: 15px;
+      }
+      .header__right__auth a {
+        /* font-size: 12px; */
+        color: #666666;
+        position: relative;
+        margin-right: 8px;
+      }
     </style>
   </head>
 
@@ -113,166 +117,195 @@
         </li>
       </ul>
       <div class="offcanvas__logo">
-        <a href="./index.html"><img src="{% static 'img/e_logo2.png' %}" alt="" /></a>
+        <a href="./index.html"><img src="{% static 'img/e_logo2.png' %}" alt="" ></a>
       </div>
       <div id="mobile-menu-wrap"></div>
       <div class="offcanvas__auth">
         <a href="#">Login</a>
         <a href="#">Register</a>
+        <div class="btn"><a href="{% url "logout" %}">Logout</a></div>
       </div>
     </div>
     <!-- Offcanvas Menu End -->
 
-<!-- Header Section Begin -->
-<header class="header">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xl-4 col-lg-4">
-        <div class="header__logo">
-          <a href="./index.html"><img src="{% static 'img/e_logo2.png' %}" alt="" /></a>
-        </div>
-      </div>
-      <div class="col-xl-4 col-lg-4">
-        <nav class="header__menu">
-          <ul>
-            <li class=""><a href="./index.html">Home</a></li>
-            <li><a href="#">Women's</a></li>
-            <li><a href="#">Men's</a></li>
-            <li><a href="./shop.html">Shop</a></li>
-            <li><a href="#">Accessories</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-xl-4 col-lg-4">
-        <div class="header__right">
-          <div class="header__right__auth">
-            <a href="{% url 'login' %}">Login</a>
+    <!-- Header Section Begin -->
+    <header class="header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-4 col-lg-4">
+            <div class="header__logo">
+              <a href="./index.html"><img src="{% static 'img/e_logo2.png' %}" alt="" /></a>
+            </div>
           </div>
-          <ul class="header__right__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span><div class="tip">2</div></a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span><div class="tip">2</div></a></li>
-          </ul>
+          <div class="col-xl-4 col-lg-4">
+            <nav class="header__menu">
+              <ul>
+                <li class="">
+                  <a href="./index.html">Home</a>
+                </li>
+                <li>
+                  <a href="#">Women's</a>
+                </li>
+                <li>
+                  <a href="#">Men's</a>
+                </li>
+                <li>
+                  <a href="./shop.html">Shop</a>
+                </li>
+                <li>
+                  <a href="#">Accessories</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-xl-4 col-lg-4">
+            <div class="header__right">
+              {% if user.is_authenticated %}
+              <div class="header__right__auth">
+                <div class="dropdown">
+                  <a href="#" class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user.username }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+              <div class="header__right__auth">
+                <a href="{% url 'login' %}">Login</a>
+              </div>
+              {% endif %}
+              <ul class="header__right__widget">
+                <li>
+                  <span class="icon_search search-switch"></span>
+                </li>
+                <li>
+                  <a href="#"><span class="icon_heart_alt"></span><div class="tip">2</div></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon_bag_alt"></span><div class="tip">2</div></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="canvas__open">
+          <i class="fa fa-bars"></i>
         </div>
       </div>
-    </div>
-    <div class="canvas__open">
-      <i class="fa fa-bars"></i>
-    </div>
-  </div>
-  
-</header>
-<!-- Header Section End -->
+    </header>
+    <!-- Header Section End -->
 
     {% block content %}
 
-    {% endblock content %}
+    {% endblock %}
 
-       <!-- Footer Section Begin -->
-       <footer class="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-7">
-              <div class="footer__about">
-                <div class="footer__logo">
-                  <a href="./index.html"><img src="{% static 'img/e_logo2.png' %}" alt="" /></a>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt cilisis.</p>
-                <div class="footer__payment">
-                  <a href="#"><img src="{% static 'img/payment/payment-1.png' %}" alt="" /></a>
-                  <a href="#"><img src="{% static 'img/payment/payment-2.png' %}" alt="" /></a>
-                  <a href="#"><img src="{% static 'img/payment/payment-3.png' %}" alt="" /></a>
-                  <a href="#"><img src="{% static 'img/payment/payment-4.png' %}" alt="" /></a>
-                  <a href="#"><img src="{% static 'img/payment/payment-5.png' %}" alt="" /></a>
-                </div>
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-7">
+            <div class="footer__about">
+              <div class="footer__logo">
+                <a href="./index.html"><img src="{% static 'img/e_logo2.png' %}" alt="" /></a>
               </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-5">
-              <div class="footer__widget">
-                <h6>Quick links</h6>
-                <ul>
-                  <li>
-                    <a href="#">About</a>
-                  </li>
-                  <li>
-                    <a href="#">Blogs</a>
-                  </li>
-                  <li>
-                    <a href="#">Contact</a>
-                  </li>
-                  <li>
-                    <a href="#">FAQ</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4">
-              <div class="footer__widget">
-                <h6>Account</h6>
-                <ul>
-                  <li>
-                    <a href="#">My Account</a>
-                  </li>
-                  <li>
-                    <a href="#">Orders Tracking</a>
-                  </li>
-                  <li>
-                    <a href="#">Checkout</a>
-                  </li>
-                  <li>
-                    <a href="#">Wishlist</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-8 col-sm-8">
-              <div class="footer__newslatter">
-                <h6>NEWSLETTER</h6>
-                <form action="#">
-                  <input type="text" placeholder="Email" />
-                  <button type="submit" class="site-btn">Subscribe</button>
-                </form>
-                <div class="footer__social">
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                  <a href="#"><i class="fa fa-youtube-play"></i></a>
-                  <a href="#"><i class="fa fa-instagram"></i></a>
-                  <a href="#"><i class="fa fa-pinterest"></i></a>
-                </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt cilisis.</p>
+              <div class="footer__payment">
+                <a href="#"><img src="{% static 'img/payment/payment-1.png' %}" alt="" /></a>
+                <a href="#"><img src="{% static 'img/payment/payment-2.png' %}" alt="" /></a>
+                <a href="#"><img src="{% static 'img/payment/payment-3.png' %}" alt="" /></a>
+                <a href="#"><img src="{% static 'img/payment/payment-4.png' %}" alt="" /></a>
+                <a href="#"><img src="{% static 'img/payment/payment-5.png' %}" alt="" /></a>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-12">
+          <div class="col-lg-2 col-md-3 col-sm-5">
+            <div class="footer__widget">
+              <h6>Quick links</h6>
+              <ul>
+                <li>
+                  <a href="#">About</a>
+                </li>
+                <li>
+                  <a href="#">Blogs</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+                <li>
+                  <a href="#">FAQ</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-4">
+            <div class="footer__widget">
+              <h6>Account</h6>
+              <ul>
+                <li>
+                  <a href="#">My Account</a>
+                </li>
+                <li>
+                  <a href="#">Orders Tracking</a>
+                </li>
+                <li>
+                  <a href="#">Checkout</a>
+                </li>
+                <li>
+                  <a href="#">Wishlist</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-8 col-sm-8">
+            <div class="footer__newslatter">
+              <h6>NEWSLETTER</h6>
+              <form action="#">
+                <input type="text" placeholder="Email" />
+                <button type="submit" class="site-btn">Subscribe</button>
+              </form>
+              <div class="footer__social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+              </div>
             </div>
           </div>
         </div>
-      </footer>
-      <!-- Footer Section End -->
-  
-      <!-- Search Begin -->
-      <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-          <div class="search-close-switch">+</div>
-          <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here....." />
-          </form>
+        <div class="row">
+          <div class="col-lg-12"></div>
         </div>
       </div>
-      <!-- Search End -->
-  
-      <!-- Js Plugins -->
-      <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-      <script src="{% static 'js/bootstrap.min.js' %}"></script>
-      <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-      <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-      <script src="{% static 'js/mixitup.min.js' %}"></script>
-      <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
-      <script src="{% static 'js/jquery.slicknav.js' %}"></script>
-      <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-      <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
-      <script src="{% static 'js/main.js' %}"></script>
-    </body>
-  </html>
-  
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+          <input type="text" id="search-input" placeholder="Search here....." />
+        </form>
+      </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

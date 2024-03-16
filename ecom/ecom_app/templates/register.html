@@ -13,15 +13,15 @@
           {% csrf_token %}
           <div class="form-group">
             <label for="first-name">First Name</label>
-            <input type="text" class="form-control" id="first-name" name="f_name" placeholder="Enter your first name" required>
+            <input autocomplete="off" type="text" class="form-control" id="first-name" name="f_name" placeholder="Enter your first name" required>
           </div>
           <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input type="text" class="form-control" id="last-name" name="l_name" placeholder="Enter your last name" required>
+            <input autocomplete="off" type="text" class="form-control" id="last-name" name="l_name" placeholder="Enter your last name" required>
           </div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter a username" required>
+            <input autocomplete="off" type="text" class="form-control" id="username" name="username" placeholder="Enter a username" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -29,11 +29,12 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="pass1" placeholder="Enter a password" required>
+            <input autocomplete="off" type="password" class="form-control" id="password" name="pass1" placeholder="Enter a password" required  >
           </div>
           <div class="form-group">
             <label for="confirm-password">Confirm Password</label>
-            <input type="password" class="form-control" id="confirm-pass2" name="pass2" placeholder="Confirm your password" required>
+            <input autocomplete="off" type="password" class="form-control" id="confirm-pass2" name="pass2" placeholder="Confirm your password" required>
+            
           </div>
           <button type="submit" class="btn btn-primary btn-block rounded">Sign Up</button>
         </form>
@@ -46,11 +47,17 @@
 
         {% if messages %}
         <div class="messages text-center text-capitalize font-weight-bold">
-          {% for message in messages %}
-          <h5>! {{message}}</h5>        
-          {% endfor %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <h5 class="text-danger">! {{ message }}</h5>
+                {% elif message.tags == 'success' %}
+                    <h5 class="text-success">! {{ message }}</h5>
+                {% else %}
+                    <h5>! {{ message }}</h5>
+                {% endif %}
+            {% endfor %}
         </div>
-        {% endif %}
+    {% endif %}
       </div>
     </div>
     <div class="col-lg-6"><img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a12343ddf6817b46a145815a50657abe2d18271441a9b0cdad0489742907d67?apiKey=04953d70f2ec47bc87e43c3e384dd0ac&"
@@ -127,4 +134,5 @@
   }
 
 </style>
+
 {% endblock content %}
