@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +36,7 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +48,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.provides.google',
+    'allauth.socialaccount.providers.google'
     'ecom_app',
     'admin_app',
     
@@ -53,8 +57,16 @@ INSTALLED_APPS = [
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE' : [
-            'profile', 'email', 
-        ]
+            'profile',
+            'email'
+        ],
+        'APP': {
+            'client_id': '1005927072035-1t1638hjkff9ah7v4gd08g2ab74nq583.apps.googleusercontent.com',
+            'client_secret': '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',
+        },
+        'AUTH_PARAMS': {
+            'access_type':'online',
+        }
     }
 }
 
@@ -163,3 +175,13 @@ EMAIL_HOST_USER = 'meliotis100@gmail.com'
 EMAIL_HOST_PASSWORD = 'edeh tvnt rrzm gapy'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
